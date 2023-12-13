@@ -10,4 +10,4 @@ pt-BR:
   categories:
     create:
       success:  'Categoria cadastrada com sucesso'
-      error:  'Não foi possível cadastrar Categoria'
+      error:  'Não foi possível cadastrar categoria'

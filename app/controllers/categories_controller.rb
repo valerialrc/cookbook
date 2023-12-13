@@ -1,6 +1,14 @@
 class CategoriesController < ApplicationController
+  before_action :authenticate_user!, only: %i[create new index]
+  before_action :authorize_user, only: %i[create new index]
+
   def index
     @categories = Category.all
+  end
+
+  def show
+    @category = Category.find(params[:id])
+    #@recipes = Recipe.joins(:has_category).where('has_category.category[id]')
   end
 
   def new
@@ -24,5 +32,9 @@ class CategoriesController < ApplicationController
 
   def category_params
     params.require(:category).permit(:name)
+  end
+
+  def authorize_user
+    return redirect_to root_path unless current_user.admin?
   end
 end

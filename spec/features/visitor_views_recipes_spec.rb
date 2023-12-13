@@ -63,4 +63,36 @@ feature 'Visitante vê receitas' do
     expect(page).to have_content('HotDog')
     expect(page).not_to have_content('Manjar')
   end
+
+  scenario 'visualiza receitas por categoria' do
+    category = create(:category, name: 'Receitas de Fastfood')
+    other_category = create(:category, name: 'Receitas Saudáveis')
+
+    recipe_type = create(:recipe_type, name: 'Sobremesa')
+    other_recipe_type = create(:recipe_type, name: 'Lanche')
+
+    first_recipe = create(:recipe, title: 'Manjar', cook_time: 60,
+                    recipe_type:,
+                    ingredients: 'leite condensado, leite, leite de coco',
+                    instructions: 'Misture tudo, leve ao fogo e mexa, leve a geladeira')
+    second_recipe = create(:recipe, title: 'Hamburguer', cook_time: 10,
+                    recipe_type: other_recipe_type,
+                    ingredients: 'hamburguer, pão de hamburguer, queijo',
+                    instructions: 'Frite o hamburguer, coloque no pão, coma')
+    third_recipe = create(:recipe, title: 'HotDog', cook_time: 10,
+                    recipe_type: other_recipe_type,
+                    ingredients: 'salsicha, pão de hotdog, ketchup, mostarda',
+                    instructions: 'Asse a salsicha, coloque no pão, coma')
+
+    create(:has_category, category: category, recipe: third_recipe)
+
+    create(:has_category, category: category, recipe: second_recipe)
+
+    visit root_path
+    click_on 'Receitas de Fastfood'
+
+    expect(page).to have_content('Hamburguer')
+    expect(page).to have_content('HotDog')
+    expect(page).not_to have_content('Manjar')
+  end
 end

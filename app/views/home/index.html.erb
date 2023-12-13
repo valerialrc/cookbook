@@ -36,3 +36,20 @@
     </div>
   </section>
 </aside>
+
+<aside>
+  <section id="categories">
+  <h3 class="text-center">
+    Categorias
+  </h3>
+    <div class="d-flex flex-row">
+      <% @categories.each do |category| %>
+        <div class="card my-5 mx-3 border-0 shadow-lg">
+          <div class="card-header">
+            <h4> <%= link_to category.name, category_path(category) %></h4>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </section>
+</aside>
