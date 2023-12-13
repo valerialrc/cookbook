@@ -1,0 +1,13 @@
+---
+pt-BR:
+  activerecord:
+    models: 
+      one: Categoria
+      other: Categoria
+    attributes:
+      category:
+        name: Nome
+  categories:
+    create:
+      success:  'Categoria cadastrada com sucesso'
+      error:  'Não foi possível cadastrar Categoria'
